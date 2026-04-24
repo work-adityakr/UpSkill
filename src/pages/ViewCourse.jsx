@@ -19,7 +19,7 @@ export default function ViewCourse() {
   const [reviewModal, setReviewModal] = useState(false)
 
   useEffect(() => {
-    ;(async () => {
+    ; (async () => {
       const courseData = await getFullDetailsOfCourse(courseId, token)
       // console.log("Course Data here... ", courseData.courseDetails)
       dispatch(setCourseSectionData(courseData.courseDetails.courseContent))
@@ -36,10 +36,14 @@ export default function ViewCourse() {
 
   return (
     <>
-      <div className="relative flex min-h-[calc(100vh-3.5rem)]">
+      {/* pt-14 pushes the content below the 3.5rem Navbar */}
+      <div className="relative flex min-h-[calc(100vh-3.5rem)] pt-14">
+        {/* Left Sidebar */}
         <VideoDetailsSidebar setReviewModal={setReviewModal} />
-        <div className="h-[calc(100vh-3.5rem)] flex-1 overflow-auto">
-          <div className="mx-6">
+
+        {/* Main Video & Content Area */}
+        <div className="h-[calc(100vh-3.5rem)] flex-1 overflow-auto bg-richblack-900">
+          <div className="mx-auto w-11/12 py-10">
             <Outlet />
           </div>
         </div>

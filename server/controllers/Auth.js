@@ -138,6 +138,8 @@ exports.login = async (req, res) => {
         message: `User is not Registered with Us Please SignUp to Continue`,
       })
     }
+    console.log(user)
+
 
     // Generate JWT token and Compare Password
     if (await bcrypt.compare(password, user.password)) {

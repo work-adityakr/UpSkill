@@ -55,8 +55,12 @@ exports.passwordUpdated = (email, name) => {
     
     <body>
         <div class="container">
-            <a href="https://studynotion-edtech-project.vercel.app"><img class="logo"
-                    src="https://i.ibb.co/7Xyj3PC/logo.png" alt="StudyNotion Logo"></a>
+            <a href="https://studynotion-edtech-project.vercel.app">          <div className="flex items-center gap-1">
+            <p className="text-2xl font-bold tracking-tighter text-richblack-5 uppercase">
+              Up<span className="text-yellow-50">Skill</span>
+            </p>
+            <div className="h-2 w-2 rounded-full bg-caribbeangreen-500 shadow-[0_0_10px_#06D6A0]"></div>
+          </div></a>
             <div class="message">Password Update Confirmation</div>
             <div class="body">
                 <p>Hey ${name},</p>
@@ -66,7 +70,7 @@ exports.passwordUpdated = (email, name) => {
             </div>
             <div class="support">If you have any questions or need further assistance, please feel free to reach out to us
                 at
-                <a href="mailto:info@studynotion.com">info@studynotion.com</a>. We are here to help!
+                <a href="mailto:info@upskill.com">info@upskill.com</a>. We are here to help!
             </div>
         </div>
     </body>

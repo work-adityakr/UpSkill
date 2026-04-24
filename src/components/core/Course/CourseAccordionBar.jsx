@@ -10,14 +10,14 @@ export default function CourseAccordionBar({ course, isActive, handleActive }) {
   const [active, setActive] = useState(false)
   useEffect(() => {
     setActive(isActive?.includes(course._id))
-  }, [isActive])
+  }, [isActive,course._id])
   const [sectionHeight, setSectionHeight] = useState(0)
   useEffect(() => {
     setSectionHeight(active ? contentEl.current.scrollHeight : 0)
   }, [active])
 
   return (
-    <div className="overflow-hidden border border-solid border-richblack-600 bg-richblack-700 text-richblack-5 last:mb-0">
+    <div className="overflow-hidden border border-solid border-richblack-600 bg-background-700 text-neutral-50 last:mb-0">
       <div>
         <div
           className={`flex cursor-pointer items-start justify-between bg-opacity-20 px-7  py-6 transition-[0.3s]`}
@@ -44,7 +44,7 @@ export default function CourseAccordionBar({ course, isActive, handleActive }) {
       </div>
       <div
         ref={contentEl}
-        className={`relative h-0 overflow-hidden bg-richblack-900 transition-[height] duration-[0.35s] ease-[ease]`}
+        className={`relative h-0 overflow-hidden bg-background-900 transition-[height] duration-[0.35s] ease-[ease]`}
         style={{
           height: sectionHeight,
         }}

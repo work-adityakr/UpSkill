@@ -9,12 +9,6 @@ import { useNavigate } from "react-router-dom"
 import { addToCart } from "../../../slices/cartSlice"
 import { ACCOUNT_TYPE } from "../../../utils/constants"
 
-// const CourseIncludes = [
-//   "8 hours on-demand video",
-//   "Full Lifetime access",
-//   "Access on Mobile and TV",
-//   "Certificate of completion",
-// ]
 
 function CourseDetailsCard({ course, setConfirmationModal, handleBuyCourse }) {
   const { user } = useSelector((state) => state.profile)
@@ -25,7 +19,6 @@ function CourseDetailsCard({ course, setConfirmationModal, handleBuyCourse }) {
   const {
     thumbnail: ThumbnailImage,
     price: CurrentPrice,
-    _id: courseId,
   } = course
 
   const handleShare = () => {
@@ -57,7 +50,7 @@ function CourseDetailsCard({ course, setConfirmationModal, handleBuyCourse }) {
   return (
     <>
       <div
-        className={`flex flex-col gap-4 rounded-md bg-richblack-700 p-4 text-richblack-5`}
+        className={`flex flex-col gap-4 rounded-md bg-background-700 p-4 text-neutral-50`}
       >
         {/* Course Image */}
         <img
@@ -90,7 +83,7 @@ function CourseDetailsCard({ course, setConfirmationModal, handleBuyCourse }) {
             )}
           </div>
           <div>
-            <p className="pb-3 pt-6 text-center text-sm text-richblack-25">
+            <p className="pb-3 pt-6 text-center text-sm text-neutral-25">
               30-Day Money-Back Guarantee
             </p>
           </div>

@@ -1,194 +1,188 @@
-// Icons Import
 import { FaArrowRight } from "react-icons/fa"
 import { Link } from "react-router-dom"
+import firstvid from "../assets/Images/firstvid.mp4"
 
-// Image and Video Import
-import Banner from "../assets/Images/banner.mp4"
 // Component Imports
 import Footer from "../components/Common/Footer"
 import ReviewSlider from "../components/Common/ReviewSlider"
 import CTAButton from "../components/core/HomePage/Button"
-import CodeBlocks from "../components/core/HomePage/CodeBlocks"
-import ExploreMore from "../components/core/HomePage/ExploreMore"
-import HighlightText from "../components/core/HomePage/HighlightText"
 import InstructorSection from "../components/core/HomePage/InstructorSection"
-import LearningLanguageSection from "../components/core/HomePage/LearningLanguageSection"
 import TimelineSection from "../components/core/HomePage/Timeline"
 
 function Home() {
   return (
-    <div>
-      {/* Section 1 */}
-      <div className="relative mx-auto flex w-11/12 max-w-maxContent flex-col items-center justify-between gap-8 text-white">
-        {/* Become a Instructor Button */}
+    <div className="relative min-h-screen bg-[#020205] font-inter overflow-hidden">
+
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 h-[600px] w-[1000px] bg-primary-50/10 blur-[160px] -z-10 opacity-60"></div>
+      <div className="absolute top-[1500px] -left-20 h-[500px] w-[500px] bg-blue-200/5 blur-[120px] -z-10"></div>
+
+      <div className="relative mx-auto flex w-11/12 max-w-maxContent flex-col items-center justify-center pt-24 pb-20">
+
         <Link to={"/signup"}>
-          <div className="group mx-auto mt-16 w-fit rounded-full bg-richblack-800 p-1 font-bold text-richblack-200 drop-shadow-[0_1.5px_rgba(255,255,255,0.25)] transition-all duration-200 hover:scale-95 hover:drop-shadow-none">
-            <div className="flex flex-row items-center gap-2 rounded-full px-10 py-[5px] transition-all duration-200 group-hover:bg-richblack-900">
-              <p>Become an Instructor</p>
-              <FaArrowRight />
-            </div>
+          <div className="group mb-8 flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 backdrop-blur-md transition-all hover:bg-white/10 cursor-pointer shadow-glass-inset">
+            <span className="text-[10px] font-bold text-primary-50 tracking-widest">NEW</span>
+            <div className="h-3 w-[1px] bg-white/20"></div>
+            <span className="text-xs font-medium text-richblack-200">The 2026 MERN Career Path is live</span>
+            <FaArrowRight className="text-[10px] text-richblack-300 group-hover:translate-x-1 transition-transform" />
           </div>
         </Link>
 
-        {/* Heading */}
-        <div className="text-center text-4xl font-semibold">
-          Empower Your Future with
-          <HighlightText text={"Coding Skills"} />
-        </div>
+        {/* Hero Title */}
+        <h1 className="text-center text-5xl md:text-7xl lg:text-[84px] font-extrabold tracking-tighter text-white leading-[1.05] max-w-[1000px]">
+          Master coding. <br />
+          <span className="bg-gradient-to-b from-primary-50 to-blue-200 bg-clip-text text-transparent italic">
+            Build the future.
+          </span>
+        </h1>
 
-        {/* Sub Heading */}
-        <div className="-mt-3 w-[90%] text-center text-lg font-bold text-richblack-300">
-          With our online coding courses, you can learn at your own pace, from
-          anywhere in the world, and get access to a wealth of resources,
-          including hands-on projects, quizzes, and personalized feedback from
-          instructors.
-        </div>
+        <p className="mt-8 text-center text-lg md:text-xl text-richblack-300 max-w-[700px] font-medium leading-relaxed">
+          UpSkill is the professional-grade platform for developers.
+          Experience high-fidelity learning with AI-driven mentorship and real-world projects.
+        </p>
 
-        {/* CTA Buttons */}
-        <div className="mt-8 flex flex-row gap-7">
+        {/* Hero Actions */}
+        <div className="mt-12 flex flex-col sm:flex-row gap-6">
           <CTAButton active={true} linkto={"/signup"}>
-            Learn More
+            Start Learning for Free
           </CTAButton>
-          <CTAButton active={false} linkto={"/login"}>
-            Book a Demo
-          </CTAButton>
+          <button className="rounded-xl border border-white/10 bg-white/5 px-8 py-3 font-bold text-white backdrop-blur-md hover:bg-white/10 transition-all">
+            Explore Courses
+          </button>
         </div>
 
-        {/* Video */}
-        <div className="mx-3 my-7 shadow-[10px_-5px_50px_-5px] shadow-blue-200">
-          <video
-            className="shadow-[20px_20px_rgba(255,255,255)]"
-            muted
-            loop
-            autoPlay
-          >
-            <source src={Banner} type="video/mp4" />
-          </video>
+        {/* Floating Video Dashboard */}
+        <div className="mt-24 w-full max-w-[1150px] relative group">
+          <div className="absolute -inset-1 bg-gradient-to-r from-primary-50/20 to-blue-200/20 rounded-[32px] blur-2xl -z-10 group-hover:opacity-100 opacity-50 transition-opacity duration-500"></div>
+          <div className="rounded-[32px] border border-white/10 bg-richblack-900/40 p-3 backdrop-blur-3xl shadow-2xl">
+            <video className="rounded-[22px] border border-white/5 shadow-2xl" muted loop autoPlay>
+              <source src={firstvid} type="video/mp4" />
+            </video>
+          </div>
         </div>
-
-        {/* Code Section 1  */}
-        <div>
-          <CodeBlocks
-            position={"lg:flex-row"}
-            heading={
-              <div className="text-4xl font-semibold">
-                Unlock your
-                <HighlightText text={"coding potential"} /> with our online
-                courses.
-              </div>
-            }
-            subheading={
-              "Our courses are designed and taught by industry experts who have years of experience in coding and are passionate about sharing their knowledge with you."
-            }
-            ctabtn1={{
-              btnText: "Try it Yourself",
-              link: "/signup",
-              active: true,
-            }}
-            ctabtn2={{
-              btnText: "Learn More",
-              link: "/signup",
-              active: false,
-            }}
-            codeColor={"text-yellow-25"}
-            codeblock={`<!DOCTYPE html>\n <html lang="en">\n<head>\n<title>This is myPage</title>\n</head>\n<body>\n<h1><a href="/">Header</a></h1>\n<nav> <a href="/one">One</a> <a href="/two">Two</a> <a href="/three">Three</a>\n</nav>\n</body>`}
-            backgroundGradient={<div className="codeblock1 absolute"></div>}
-          />
-        </div>
-
-        {/* Code Section 2 */}
-        <div>
-          <CodeBlocks
-            position={"lg:flex-row-reverse"}
-            heading={
-              <div className="w-[100%] text-4xl font-semibold lg:w-[50%]">
-                Start
-                <HighlightText text={"coding in seconds"} />
-              </div>
-            }
-            subheading={
-              "Go ahead, give it a try. Our hands-on learning environment means you'll be writing real code from your very first lesson."
-            }
-            ctabtn1={{
-              btnText: "Continue Lesson",
-              link: "/signup",
-              active: true,
-            }}
-            ctabtn2={{
-              btnText: "Learn More",
-              link: "/signup",
-              active: false,
-            }}
-            codeColor={"text-white"}
-            codeblock={`import React from "react";\n import CTAButton from "./Button";\nimport TypeAnimation from "react-type";\nimport { FaArrowRight } from "react-icons/fa";\n\nconst Home = () => {\nreturn (\n<div>Home</div>\n)\n}\nexport default Home;`}
-            backgroundGradient={<div className="codeblock2 absolute"></div>}
-          />
-        </div>
-
-        {/* Explore Section */}
-        <ExploreMore />
       </div>
 
-      {/* Section 2 */}
-      <div className="bg-pure-greys-5 text-richblack-700">
-        <div className="homepage_bg h-[320px]">
-          {/* Explore Full Catagory Section */}
-          <div className="mx-auto flex w-11/12 max-w-maxContent flex-col items-center justify-between gap-8">
-            <div className="lg:h-[150px]"></div>
-            <div className="flex flex-row gap-7 text-white lg:mt-8">
+      {/* BENTO GRID FEATURES */}
+      <div className="mx-auto w-11/12 max-w-maxContent py-32 flex flex-col gap-16">
+        <div className="text-center md:text-left max-w-[700px] space-y-6">
+          <h2 className="text-5xl md:text-6xl font-extrabold text-white tracking-tighter leading-tight">
+            Harness the power of <br />
+            <span className="bg-gradient-to-r from-primary-50 to-blue-200 bg-clip-text text-transparent">AI-driven learning</span>
+          </h2>
+          <p className="text-richblack-300 text-xl font-medium leading-relaxed">
+            Everything you need to go from beginner to industry-pro in months, not years.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-12 md:grid-rows-2 gap-8 min-h-[850px]">
+
+          <div className="md:col-span-7 rounded-[40px] border border-white/5 bg-richblack-900/40 p-10 md:p-14 backdrop-blur-xl overflow-hidden relative group transition-all duration-500 hover:border-white/10">
+            <div className="absolute -top-20 -right-20 h-96 w-96 bg-primary-50/10 blur-[120px] rounded-full -z-10"></div>
+
+            <div className="relative z-20 space-y-4">
+              <h3 className="text-3xl font-bold text-white tracking-tight">Interactive IDE</h3>
+              <p className="text-richblack-300 text-lg max-w-[350px] leading-relaxed">
+                Write, debug, and deploy high-performance code directly in your browser without any setup.
+              </p>
+
+              <Link to="/signup" className="mt-8 flex items-center gap-3 text-primary-50 text-lg font-bold hover:gap-5 transition-all group/btn">
+                Try it yourself <FaArrowRight className="text-sm transition-transform" />
+              </Link>
+            </div>
+
+            <div className="absolute bottom-[-10px] right-[-10px] w-[85%] h-[55%] rounded-tl-[32px] border-t border-l border-white/10 bg-[#020205] p-8 shadow-[0_-20px_50px_rgba(0,0,0,0.5)] transition-all duration-700 group-hover:translate-y-[-15px] group-hover:translate-x-[-15px] group-hover:border-white/20">
+              <div className="flex gap-2.5 mb-6 opacity-60">
+                <div className="h-3 w-3 rounded-full bg-pink-500 shadow-[0_0_10px_rgba(236,72,153,0.3)]"></div>
+                <div className="h-3 w-3 rounded-full bg-yellow-100 shadow-[0_0_10px_rgba(255,214,10,0.3)]"></div>
+                <div className="h-3 w-3 rounded-full bg-caribbeangreen-200 shadow-[0_0_10px_rgba(6,214,160,0.3)]"></div>
+              </div>
+              <pre className="text-sm md:text-base font-mono leading-relaxed tracking-tight">
+                <code className="text-blue-100">const </code>
+                <code className="text-yellow-50">UpSkill </code>
+                <code className="text-blue-100">= () =&gt; {"{"} </code> <br />
+                <code className="text-richblack-400 pl-6">  return "Building Future";</code> <br />
+                <code className="text-blue-100">{"}"}</code>
+              </pre>
+            </div>
+          </div>
+
+          {/* 24/7 Support (Improved Visual Weight) */}
+          <div className="md:col-span-5 rounded-[40px] border border-white/5 bg-gradient-to-br from-richblack-900/60 to-richblack-800/20 p-10 md:p-14 backdrop-blur-xl flex flex-col justify-between group hover:border-primary-50/20 transition-all duration-500">
+            <Link to="/signup" className="h-20 w-20 rounded-3xl bg-primary-50/10 border border-primary-50/20 flex items-center justify-center text-primary-50 shadow-glow-indigo group-hover:scale-110 group-hover:rotate-12 transition-all duration-500">
+              <FaArrowRight className="-rotate-45 text-2xl" />
+            </Link>
+            <div className="space-y-3">
+              <h3 className="text-3xl font-bold text-white tracking-tight">24/7 Expert Support</h3>
+              <p className="text-richblack-300 text-lg leading-relaxed">Stuck on a bug? Our mentors and AI assist you within minutes, anytime.</p>
+            </div>
+          </div>
+
+          {/* Industry Ready (Larger text and background) */}
+          <div className="md:col-span-5 rounded-[40px] border border-white/5 bg-richblack-900/20 p-10 md:p-14 backdrop-blur-xl flex flex-col justify-end relative group overflow-hidden">
+            <div className="absolute top-5 right-[-20px] p-8 opacity-5 group-hover:opacity-10 transition-opacity duration-700 pointer-events-none">
+              <h1 className="text-9xl font-black text-white">FAANG</h1>
+            </div>
+            <div className="relative z-10 space-y-3">
+              <h3 className="text-3xl font-bold text-white tracking-tight">Industry Ready</h3>
+              <p className="text-richblack-300 text-lg leading-relaxed">Curriculum designed by world-class engineers from top tech giants.</p>
+            </div>
+          </div>
+
+          <div className="md:col-span-7 rounded-[40px] border border-white/5 bg-richblack-900/20 p-10 md:p-14 backdrop-blur-xl flex items-center justify-between group hover:border-white/10 transition-all duration-500">
+            <div className="max-w-[55%] space-y-3">
+              <h3 className="text-3xl font-bold text-white tracking-tight">Global Community</h3>
+              <p className="text-richblack-300 text-lg leading-relaxed">Join 20,000+ developers learning and building projects together.</p>
+            </div>
+            <div className="flex -space-x-6">
+              {[1, 2, 3, 4].map(i => (
+                <div key={i} className="h-20 w-20 rounded-full border-[6px] border-richblack-900 bg-primary-500 shadow-2xl group-hover:translate-y-[-10px] transition-all duration-500" style={{ transitionDelay: `${i * 70}ms` }}></div>
+              ))}
+              <div className="h-20 w-20 rounded-full border-[6px] border-richblack-900 bg-primary-50 flex items-center justify-center text-sm font-bold text-white shadow-glow-indigo group-hover:translate-y-[-10px] transition-all duration-500" style={{ transitionDelay: '350ms' }}>
+                +20k
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="bg-white py-24">
+        <div className="mx-auto w-11/12 max-w-maxContent">
+          <div className="mb-10 mt-[-100px] flex flex-col justify-between gap-7 lg:mt-20 lg:flex-row lg:gap-0">
+            <div className="text-4xl font-extrabold tracking-tighter lg:w-[45%] text-richblack-900 leading-tight">
+              Get the skills you need for a <br />
+              <span className="bg-gradient-to-r from-[#1FA2FF] to-[#12D8FA] bg-clip-text text-transparent italic">
+                job that is in demand.
+              </span>
+            </div>
+
+            <div className="flex flex-col items-start gap-10 lg:w-[40%]">
+              <div className="text-[16px] text-richblack-600 font-medium leading-relaxed">
+                The modern <span className="font-bold text-primary-50">UpSkill</span> dictates its own terms.
+                Today, becoming a specialist requires more than just professional skills—it requires <span className="text-richblack-900 font-bold underline decoration-cyan-200">constant evolution.</span>
+              </div>
               <CTAButton active={true} linkto={"/signup"}>
-                <div className="flex items-center gap-2">
-                  Explore Full Catalog
-                  <FaArrowRight />
-                </div>
-              </CTAButton>
-              <CTAButton active={false} linkto={"/login"}>
                 Learn More
               </CTAButton>
             </div>
           </div>
-        </div>
 
-        <div className="mx-auto flex w-11/12 max-w-maxContent flex-col items-center justify-between gap-8 ">
-          {/* Job that is in Demand - Section 1 */}
-          <div className="mb-10 mt-[-100px] flex flex-col justify-between gap-7 lg:mt-20 lg:flex-row lg:gap-0">
-            <div className="text-4xl font-semibold lg:w-[45%] ">
-              Get the skills you need for a{" "}
-              <HighlightText text={"job that is in demand."} />
-            </div>
-            <div className="flex flex-col items-start gap-10 lg:w-[40%]">
-              <div className="text-[16px]">
-                The modern StudyNotion is the dictates its own terms. Today, to
-                be a competitive specialist requires more than professional
-                skills.
-              </div>
-              <CTAButton active={true} linkto={"/signup"}>
-                <div className="">Learn More</div>
-              </CTAButton>
-            </div>
+          <div className="mt-20">
+            <TimelineSection />
           </div>
-
-          {/* Timeline Section - Section 2 */}
-          <TimelineSection />
-
-          {/* Learning Language Section - Section 3 */}
-          <LearningLanguageSection />
         </div>
       </div>
 
-      {/* Section 3 */}
-      <div className="relative mx-auto my-20 flex w-11/12 max-w-maxContent flex-col items-center justify-between gap-8 bg-richblack-900 text-white">
-        {/* Become a instructor section */}
+      {/* INSTRUCTOR & SOCIAL PROOF */}
+      <div className="mx-auto w-11/12 max-w-maxContent py-24 flex flex-col gap-24">
         <InstructorSection />
 
-        {/* Reviws from Other Learner */}
-        <h1 className="text-center text-4xl font-semibold mt-8">
-          Reviews from other learners
-        </h1>
-        <ReviewSlider />
+        <div className="flex flex-col gap-12 items-center">
+          <div className="text-center space-y-4">
+            <h2 className="text-4xl font-bold text-white tracking-tight">Hear from our <code className="text-yellow-50">Learner</code></h2>
+            <div className="h-1 w-20 bg-primary-50 mx-auto rounded-full"></div>
+          </div>
+          <ReviewSlider />
+        </div>
       </div>
 
-      {/* Footer */}
       <Footer />
     </div>
   )

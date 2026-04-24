@@ -1,5 +1,4 @@
-import React from "react";
-import TimeLineImage from "../../../assets/Images/TimelineImage.png";
+import firstphoto from "../../../assets/Images/firstphoto.jpg";
 import Logo1 from "../../../assets/TimeLineLogo/Logo1.svg";
 import Logo2 from "../../../assets/TimeLineLogo/Logo2.svg";
 import Logo3 from "../../../assets/TimeLineLogo/Logo3.svg";
@@ -31,55 +30,76 @@ const TimeLine = [
 
 const TimelineSection = () => {
   return (
-    <div>
-      <div className="flex flex-col lg:flex-row gap-20 mb-20 items-center">
-        <div className="lg:w-[45%] flex flex-col gap-14 lg:gap-3">
+<div className="w-full py-20">
+      <div className="flex flex-col lg:flex-row gap-24 items-center justify-between">
+        
+        {/* 🗺️ LEFT SECTION: ROADMAP */}
+        <div className="lg:w-[45%] flex flex-col items-start">
           {TimeLine.map((ele, i) => {
             return (
-              <div className="flex flex-col lg:gap-3" key={i}>
-                <div className="flex gap-6" key={i}>
-                  <div className="w-[52px] h-[52px] bg-white rounded-full flex justify-center items-center shadow-[#00000012] shadow-[0_0_62px_0]">
-                    <img src={ele.Logo} alt="" />
+              <div className="flex flex-col group" key={i}>
+                <div className="flex gap-8 items-start">
+                  {/* Icon with Ring Effect */}
+                  <div className="relative z-10">
+                    <div className="w-14 h-14 bg-white rounded-full flex justify-center items-center shadow-[0_0_40px_rgba(0,0,0,0.08)] group-hover:scale-110 transition-transform duration-300">
+                      <img src={ele.Logo} alt={ele.Heading} className="w-6 h-6" />
+                    </div>
+                    {/* Dashed Line Connection */}
+                    {i !== TimeLine.length - 1 && (
+                      <div className="absolute left-1/2 -translate-x-1/2 top-14 h-14 border-l-2 border-dashed border-richblack-100"></div>
+                    )}
                   </div>
-                  <div>
-                    <h2 className="font-semibold text-[18px]">{ele.Heading}</h2>
-                    <p className="text-base">{ele.Description}</p>
+
+                  <div className="pb-10">
+                    <h2 className="font-bold text-xl text-richblack-800 tracking-tight">
+                        {ele.Heading}
+                    </h2>
+                    <p className="text-richblack-500 font-medium mt-1 leading-relaxed">
+                        {ele.Description}
+                    </p>
                   </div>
                 </div>
-                <div
-                  className={`hidden ${
-                    TimeLine.length - 1 === i ? "hidden" : "lg:block"
-                  }  h-14 border-dotted border-r border-richblack-100 bg-richblack-400/0 w-[26px]`}
-                ></div>
               </div>
             );
           })}
         </div>
-        <div className="relative w-fit h-fit shadow-blue-200 shadow-[0px_0px_30px_0px]">
-          <div className="absolute lg:left-[50%] lg:bottom-0 lg:translate-x-[-50%] lg:translate-y-[50%] bg-caribbeangreen-700 flex lg:flex-row flex-col text-white uppercase py-5 gap-4 lg:gap-0 lg:py-10 ">
-            {/* Section 1 */}
-            <div className="flex gap-5 items-center lg:border-r border-caribbeangreen-300 px-7 lg:px-14">
-              <h1 className="text-3xl font-bold w-[75px]">10</h1>
-              <h1 className="text-caribbeangreen-300 text-sm w-[75px]">
-                Years experiences
-              </h1>
-            </div>
 
-            {/* Section 2 */}
-            <div className="flex gap-5 items-center lg:px-14 px-7">
-              <h1 className="text-3xl font-bold w-[75px]">250</h1>
-              <h1 className="text-caribbeangreen-300 text-sm w-[75px]">
-                types of courses
-              </h1>
+        {/* 🖼️ RIGHT SECTION: IMAGE & STATS */}
+        <div className="relative lg:w-[50%] h-fit">
+          {/* Ambient Background Glow behind the image */}
+          <div className="absolute -inset-10 bg-blue-200/20 rounded-full blur-[120px] -z-10"></div>
+          
+          <div className="relative">
+            <img
+              src={firstphoto}
+              alt="timelineImage"
+              className="rounded-3xl object-cover shadow-[25px_25px_0px_0px_#F5F5F5] border border-white/20 h-[400px] lg:h-auto"
+            />
+
+            {/* 📊 THE "COOL" STATS BAR: Glassmorphism Design */}
+            <div className="absolute left-1/2 bottom-0 -translate-x-1/2 translate-y-1/2 
+                            bg-caribbeangreen-700 flex flex-col md:flex-row items-center py-8 px-10 gap-8 md:gap-0
+                            rounded-3xl border border-white/10 shadow-2xl backdrop-blur-md">
+              
+              {/* Stat 1 */}
+              <div className="flex gap-6 items-center md:border-r border-caribbeangreen-300/30 pr-10">
+                <h1 className="text-4xl font-extrabold text-white">10</h1>
+                <p className="text-caribbeangreen-200 text-xs font-bold uppercase tracking-widest leading-tight">
+                  Years <br/> Experience
+                </p>
+              </div>
+
+              {/* Stat 2 */}
+              <div className="flex gap-6 items-center pl-0 md:pl-10">
+                <h1 className="text-4xl font-extrabold text-white">250</h1>
+                <p className="text-caribbeangreen-200 text-xs font-bold uppercase tracking-widest leading-tight">
+                  Types of <br/> Courses
+                </p>
+              </div>
             </div>
-            <div></div>
           </div>
-          <img
-            src={TimeLineImage}
-            alt="timelineImage"
-            className="shadow-white shadow-[20px_20px_0px_0px] object-cover h-[400px] lg:h-fit"
-          />
         </div>
+
       </div>
     </div>
   );

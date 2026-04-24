@@ -37,13 +37,14 @@ export default function SubSectionModal({
   const { course } = useSelector((state) => state.course)
 
   useEffect(() => {
+    if (!modalData) return;
+
     if (view || edit) {
-      // console.log("modalData", modalData)
-      setValue("lectureTitle", modalData.title)
-      setValue("lectureDesc", modalData.description)
-      setValue("lectureVideo", modalData.videoUrl)
+      setValue("lectureTitle", modalData.title || "");
+      setValue("lectureDesc", modalData.description || "");
+      setValue("lectureVideo", modalData.videoUrl || "");
     }
-  }, [])
+  }, [view, edit, modalData, setValue]);
 
   // detect whether form is updated or not
   const isFormUpdated = () => {
@@ -125,14 +126,14 @@ export default function SubSectionModal({
 
   return (
     <div className="fixed inset-0 z-[1000] !mt-0 grid h-screen w-screen place-items-center overflow-auto bg-white bg-opacity-10 backdrop-blur-sm">
-      <div className="my-10 w-11/12 max-w-[700px] rounded-lg border border-richblack-400 bg-richblack-800">
+      <div className="my-10 w-11/12 max-w-[700px] rounded-lg border border-richblack-400 bg-background-card">
         {/* Modal Header */}
-        <div className="flex items-center justify-between rounded-t-lg bg-richblack-700 p-5">
-          <p className="text-xl font-semibold text-richblack-5">
+        <div className="flex items-center justify-between rounded-t-lg bg-background-700 p-5">
+          <p className="text-xl font-semibold text-neutral-50">
             {view && "Viewing"} {add && "Adding"} {edit && "Editing"} Lecture
           </p>
           <button onClick={() => (!loading ? setModalData(null) : {})}>
-            <RxCross2 className="text-2xl text-richblack-5" />
+            <RxCross2 className="text-2xl text-neutral-50" />
           </button>
         </div>
         {/* Modal Form */}
@@ -153,7 +154,7 @@ export default function SubSectionModal({
           />
           {/* Lecture Title */}
           <div className="flex flex-col space-y-2">
-            <label className="text-sm text-richblack-5" htmlFor="lectureTitle">
+            <label className="text-sm text-neutral-50" htmlFor="lectureTitle">
               Lecture Title {!view && <sup className="text-pink-200">*</sup>}
             </label>
             <input
@@ -171,7 +172,7 @@ export default function SubSectionModal({
           </div>
           {/* Lecture Description */}
           <div className="flex flex-col space-y-2">
-            <label className="text-sm text-richblack-5" htmlFor="lectureDesc">
+            <label className="text-sm text-neutral-50" htmlFor="lectureDesc">
               Lecture Description{" "}
               {!view && <sup className="text-pink-200">*</sup>}
             </label>

@@ -66,11 +66,26 @@ exports.categoryPageDetails = async (req, res) => {
     }
     // Handle the case when there are no courses
     if (selectedCategory.courses.length === 0) {
-      console.log("No courses found for the selected category.")
-      return res.status(404).json({
-        success: false,
-        message: "No courses found for the selected category.",
-      })
+      console.log("Category exists but has no courses. Sending 200 with empty data.")
+
+      // Get courses for other categories so the page isn't totally blank
+      const categoriesExceptSelected = await Category.find({ _id: { $ne: categoryId } });
+      let differentCategory = null;
+
+      if (categoriesExceptSelected.length > 0) {
+        differentCategory = await Category.findById(
+          categoriesExceptSelected[Math.floor(Math.random() * categoriesExceptSelected.length)]._id
+        ).populate({ path: "courses", match: { status: "Published" } }).exec();
+      }
+
+      return res.status(200).json({
+        success: true,
+        data: {
+          selectedCategory, // This will have courses: []
+          differentCategory,
+          mostSellingCourses: [], // Or fetch them as usual
+        },
+      });
     }
 
     // Get courses for other categories

@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import Footer from "../components/Common/Footer"
 import CourseCard from "../components/core/Catalog/Course_Card"
 import CourseSlider from "../components/core/Catalog/Course_Slider"
@@ -15,9 +15,11 @@ function Catalog() {
   const [active, setActive] = useState(1)
   const [catalogPageData, setCatalogPageData] = useState(null)
   const [categoryId, setCategoryId] = useState("")
+  const navigate = useNavigate();
+  
   // Fetch All Categories
   useEffect(() => {
-    ;(async () => {
+    ; (async () => {
       try {
         const res = await apiConnector("GET", categories.CATEGORIES_API)
         const category_id = res?.data?.data?.filter(
@@ -31,7 +33,7 @@ function Catalog() {
   }, [catalogName])
   useEffect(() => {
     if (categoryId) {
-      ;(async () => {
+      ; (async () => {
         try {
           const res = await getCatalogPageData(categoryId)
           setCatalogPageData(res)
@@ -56,78 +58,88 @@ function Catalog() {
   return (
     <>
       {/* Hero Section */}
-      <div className=" box-content bg-richblack-800 px-4">
-        <div className="mx-auto flex min-h-[260px] max-w-maxContentTab flex-col justify-center gap-4 lg:max-w-maxContent ">
-          <p className="text-sm text-richblack-300">
+      <div className="relative border-b border-white/5 bg-[#020205] py-24 overflow-hidden">
+        <div className="absolute top-0 left-0 -z-10 h-[500px] w-[800px] bg-primary-50/10 blur-[160px]"></div>
+
+        <div className="mx-auto flex w-11/12 max-w-maxContent flex-col gap-6">
+          <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-richblack-500">
             {`Home / Catalog / `}
-            <span className="text-yellow-25">
-              {catalogPageData?.data?.selectedCategory?.name}
-            </span>
+            <span className="text-primary-50">{catalogPageData?.data?.selectedCategory?.name}</span>
           </p>
-          <p className="text-3xl text-richblack-5">
+
+          {/* Title - Extra Bold */}
+          <h1 className="text-5xl md:text-7xl font-extrabold tracking-tighter text-white leading-tight">
             {catalogPageData?.data?.selectedCategory?.name}
-          </p>
-          <p className="max-w-[870px] text-richblack-200">
+          </h1>
+
+          <p className="max-w-[800px] text-xl font-medium text-richblack-300 italic leading-relaxed">
             {catalogPageData?.data?.selectedCategory?.description}
           </p>
         </div>
       </div>
 
-      {/* Section 1 */}
-      <div className=" mx-auto box-content w-full max-w-maxContentTab px-4 py-12 lg:max-w-maxContent">
-        <div className="section_heading">Courses to get you started</div>
-        <div className="my-4 flex border-b border-b-richblack-600 text-sm">
-          <p
-            className={`px-4 py-2 ${
-              active === 1
-                ? "border-b border-b-yellow-25 text-yellow-25"
-                : "text-richblack-50"
-            } cursor-pointer`}
-            onClick={() => setActive(1)}
-          >
-            Most Populer
-          </p>
-          <p
-            className={`px-4 py-2 ${
-              active === 2
-                ? "border-b border-b-yellow-25 text-yellow-25"
-                : "text-richblack-50"
-            } cursor-pointer`}
-            onClick={() => setActive(2)}
-          >
-            New
-          </p>
+      <div className="mx-auto box-content w-full max-w-maxContent px-4 py-16">
+        <div className="flex flex-col gap-2">
+          <h2 className="text-4xl font-extrabold tracking-tight text-white">
+            Courses to get you <span className="text-primary-50">started</span>
+          </h2>
+          <div className="h-1 w-20 bg-primary-50 rounded-full"></div>
         </div>
-        <div>
-          <CourseSlider
-            Courses={catalogPageData?.data?.selectedCategory?.courses}
-          />
-        </div>
-      </div>
-      {/* Section 2 */}
-      <div className=" mx-auto box-content w-full max-w-maxContentTab px-4 py-12 lg:max-w-maxContent">
-        <div className="section_heading">
-          Top courses in {catalogPageData?.data?.differentCategory?.name}
-        </div>
+
+        {catalogPageData?.data?.selectedCategory?.courses?.length > 0 && (
+          <div className="my-10 flex w-fit bg-richblack-900 p-1 rounded-2xl border border-white/5 shadow-glass-inset">
+            <button
+              className={`rounded-xl py-3 px-10 text-sm font-bold transition-all duration-300 ${active === 1 ? "bg-richblack-800 text-primary-50 shadow-glow-indigo" : "text-richblack-400 hover:text-white"
+                }`}
+              onClick={() => setActive(1)}
+            >
+              Most Popular
+            </button>
+            <button
+              className={`rounded-xl py-3 px-10 text-sm font-bold transition-all duration-300 ${active === 2 ? "bg-richblack-800 text-primary-50 shadow-glow-indigo" : "text-richblack-400 hover:text-white"
+                }`}
+              onClick={() => setActive(2)}
+            >
+              New
+            </button>
+          </div>
+        )}
+
         <div className="py-8">
-          <CourseSlider
-            Courses={catalogPageData?.data?.differentCategory?.courses}
-          />
+          {catalogPageData?.data?.selectedCategory?.courses?.length > 0 ? (
+            <CourseSlider Courses={catalogPageData?.data?.selectedCategory?.courses} />
+          ) : (
+            <div className="flex flex-col items-center justify-center py-24 rounded-[40px] border border-white/5 bg-white/5 backdrop-blur-xl shadow-glass-inset">
+              <div className="h-24 w-24 rounded-full bg-richblack-900 flex items-center justify-center mb-6 border border-white/10 shadow-glow-indigo">
+                <p className="text-5xl animate-pulse">📚</p>
+              </div>
+              <h3 className="text-2xl font-bold text-white tracking-tight">No courses found yet</h3>
+              <p className="text-richblack-400 mt-2 text-lg font-medium">Check back later or explore our other top-rated categories.</p>
+              <button
+                onClick={() => navigate("/courses/68fced76cf6a3c2138c63c99")}
+                className="mt-8 text-primary-50 font-bold hover:underline"
+              >
+                Explore Java Courses →
+              </button>
+            </div>
+          )}
         </div>
       </div>
 
-      {/* Section 3 */}
-      <div className=" mx-auto box-content w-full max-w-maxContentTab px-4 py-12 lg:max-w-maxContent">
-        <div className="section_heading">Frequently Bought</div>
-        <div className="py-8">
-          <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-            {catalogPageData?.data?.mostSellingCourses
-              ?.slice(0, 4)
-              .map((course, i) => (
-                <CourseCard course={course} key={i} Height={"h-[400px]"} />
-              ))}
+      <div className="mx-auto box-content w-full max-w-maxContent px-4 py-16">
+        <h2 className="text-3xl font-bold text-white tracking-tight mb-12">Frequently Bought</h2>
+
+        {catalogPageData?.data?.mostSellingCourses?.length > 0 ? (
+          <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
+            {catalogPageData?.data?.mostSellingCourses?.slice(0, 4).map((course, i) => (
+              <div key={i} className="transition-all duration-500 hover:scale-[1.01]">
+                <CourseCard course={course} Height={"h-[400px]"} />
+              </div>
+            ))}
           </div>
-        </div>
+        ) : (
+          <p className="text-richblack-400 italic">Popular courses will appear here once students start enrolling.</p>
+        )}
       </div>
 
       <Footer />

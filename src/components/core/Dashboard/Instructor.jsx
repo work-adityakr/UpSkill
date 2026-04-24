@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
-
 import { fetchInstructorCourses } from "../../../services/operations/courseDetailsAPI"
 import { getInstructorData } from "../../../services/operations/profileAPI"
 import InstructorChart from "./InstructorDashboard/InstructorChart"
@@ -18,106 +17,71 @@ export default function Instructor() {
       setLoading(true)
       const instructorApiData = await getInstructorData(token)
       const result = await fetchInstructorCourses(token)
-      console.log(instructorApiData)
       if (instructorApiData.length) setInstructorData(instructorApiData)
-      if (result) {
-        setCourses(result)
-      }
+      if (result) setCourses(result)
       setLoading(false)
     })()
   }, [token])
 
-  const totalAmount = instructorData?.reduce(
-    (acc, curr) => acc + curr.totalAmountGenerated,
-    0
-  )
-
-  const totalStudents = instructorData?.reduce(
-    (acc, curr) => acc + curr.totalStudentsEnrolled,
-    0
-  )
+  const totalAmount = instructorData?.reduce((acc, curr) => acc + curr.totalAmountGenerated, 0)
+  const totalStudents = instructorData?.reduce((acc, curr) => acc + curr.totalStudentsEnrolled, 0)
 
   return (
-    <div>
-      <div className="space-y-2">
-        <h1 className="text-2xl font-bold text-richblack-5">
-          Hi {user?.firstName} 👋
+    <div className="flex flex-col gap-y-6 pb-12">
+      {/* 🟢 Welcome Header */}
+      <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-r from-richblack-800 to-transparent p-8">
+        <div className="absolute -right-10 -top-10 -z-10 h-40 w-40 rounded-full bg-primary-50/10 blur-3xl"></div>
+        <h1 className="text-4xl font-extrabold tracking-tight text-white">
+          Welcome back, <span className="bg-gradient-to-r from-primary-50 to-blue-200 bg-clip-text text-transparent italic">{user?.firstName}</span> 👋
         </h1>
-        <p className="font-medium text-richblack-200">
-          Let's start something new
-        </p>
+        <p className="mt-2 font-medium italic text-richblack-300">"The best way to predict the future is to create it."</p>
       </div>
+
       {loading ? (
-        <div className="spinner"></div>
+        <div className="grid min-h-[400px] place-items-center"><div className="spinner"></div></div>
       ) : courses.length > 0 ? (
-        <div>
-          <div className="my-4 flex h-[450px] space-x-4">
-            {/* Render chart / graph */}
+        <div className="flex flex-col gap-y-6">
+          {/* 📊 Analytics & Stats Section */}
+          <div className="flex flex-col gap-6 lg:flex-row">
             {totalAmount > 0 || totalStudents > 0 ? (
               <InstructorChart courses={instructorData} />
             ) : (
-              <div className="flex-1 rounded-md bg-richblack-800 p-6">
-                <p className="text-lg font-bold text-richblack-5">Visualize</p>
-                <p className="mt-4 text-xl font-medium text-richblack-50">
-                  Not Enough Data To Visualize
-                </p>
+              <div className="flex-1 rounded-2xl border border-white/5 bg-richblack-900/40 p-8 backdrop-blur-md">
+                <p className="text-xl font-bold text-white">Visualize Analytics</p>
+                <p className="mt-10 text-center text-lg font-medium text-richblack-400 italic">Not enough data to generate insights yet.</p>
               </div>
             )}
-            {/* Total Statistics */}
-            <div className="flex min-w-[250px] flex-col rounded-md bg-richblack-800 p-6">
-              <p className="text-lg font-bold text-richblack-5">Statistics</p>
-              <div className="mt-4 space-y-4">
-                <div>
-                  <p className="text-lg text-richblack-200">Total Courses</p>
-                  <p className="text-3xl font-semibold text-richblack-50">
-                    {courses.length}
-                  </p>
-                </div>
-                <div>
-                  <p className="text-lg text-richblack-200">Total Students</p>
-                  <p className="text-3xl font-semibold text-richblack-50">
-                    {totalStudents}
-                  </p>
-                </div>
-                <div>
-                  <p className="text-lg text-richblack-200">Total Income</p>
-                  <p className="text-3xl font-semibold text-richblack-50">
-                    Rs. {totalAmount}
-                  </p>
+
+            {/* Quick Stats Sidebar */}
+            <div className="flex min-w-[280px] flex-col gap-y-8 rounded-2xl border border-white/5 bg-richblack-900/40 p-8 backdrop-blur-md shadow-glass-inset">
+              <p className="text-xl font-bold text-white tracking-tight">Quick Analytics</p>
+              <div className="space-y-7">
+                <StatTile label="Total Courses" value={courses.length} />
+                <StatTile label="Total Students" value={totalStudents} />
+                <div className="rounded-2xl border border-primary-50/20 bg-primary-50/5 p-5">
+                  <StatTile label="Estimated Income" value={`₹ ${totalAmount}`} color="text-caribbeangreen-300 shadow-glow-green" />
                 </div>
               </div>
             </div>
           </div>
-          <div className="rounded-md bg-richblack-800 p-6">
-            {/* Render 3 courses */}
-            <div className="flex items-center justify-between">
-              <p className="text-lg font-bold text-richblack-5">Your Courses</p>
-              <Link to="/dashboard/my-courses">
-                <p className="text-xs font-semibold text-yellow-50">View All</p>
-              </Link>
+
+          {/* 🎓 Your Courses Section (Bento Grid) */}
+          <div className="rounded-2xl border border-white/5 bg-richblack-900/40 p-8 backdrop-blur-md">
+            <div className="flex items-center justify-between mb-6">
+              <p className="text-2xl font-bold text-white tracking-tight">Recent Courses</p>
+              <Link to="/dashboard/my-courses" className="text-sm font-bold text-yellow-50 hover:underline">View All</Link>
             </div>
-            <div className="my-4 flex items-start space-x-6">
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
               {courses.slice(0, 3).map((course) => (
-                <div key={course._id} className="w-1/3">
-                  <img
-                    src={course.thumbnail}
-                    alt={course.courseName}
-                    className="h-[201px] w-full rounded-md object-cover"
-                  />
-                  <div className="mt-3 w-full">
-                    <p className="text-sm font-medium text-richblack-50">
-                      {course.courseName}
-                    </p>
-                    <div className="mt-1 flex items-center space-x-2">
-                      <p className="text-xs font-medium text-richblack-300">
-                        {course.studentsEnroled.length} students
-                      </p>
-                      <p className="text-xs font-medium text-richblack-300">
-                        |
-                      </p>
-                      <p className="text-xs font-medium text-richblack-300">
-                        Rs. {course.price}
-                      </p>
+                <div key={course._id} className="group relative overflow-hidden rounded-2xl border border-white/5 bg-richblack-800/50 transition-all hover:bg-richblack-800">
+                  <div className="aspect-video overflow-hidden">
+                    <img src={course.thumbnail} alt={course.courseName} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                  </div>
+                  <div className="p-5">
+                    <p className="text-lg font-bold text-richblack-5 truncate">{course.courseName}</p>
+                    <div className="mt-3 flex items-center justify-between border-t border-richblack-700 pt-3">
+                      <p className="text-xs font-bold text-richblack-400 uppercase tracking-widest">{course.studentsEnroled.length} Students</p>
+                      <p className="text-sm font-extrabold text-primary-50">₹ {course.price}</p>
                     </div>
                   </div>
                 </div>
@@ -126,17 +90,27 @@ export default function Instructor() {
           </div>
         </div>
       ) : (
-        <div className="mt-20 rounded-md bg-richblack-800 p-6 py-20">
-          <p className="text-center text-2xl font-bold text-richblack-5">
-            You have not created any courses yet
-          </p>
-          <Link to="/dashboard/add-course">
-            <p className="mt-1 text-center text-lg font-semibold text-yellow-50">
-              Create a course
-            </p>
+        /* 📭 Empty State */
+        <div className="mt-10 flex flex-col items-center justify-center rounded-3xl border border-dashed border-richblack-700 bg-richblack-900/20 py-20 text-center backdrop-blur-sm">
+          <p className="text-2xl font-bold text-white">Your digital classroom is empty</p>
+          <p className="mt-2 text-richblack-400">Share your expertise and start your instructor journey today.</p>
+          <Link to="/dashboard/add-course" className="mt-6 rounded-xl bg-yellow-50 px-8 py-3 font-bold text-richblack-900 shadow-glow-yellow transition-all hover:scale-105">
+            Create Your First Course
           </Link>
         </div>
       )}
+    </div>
+  )
+}
+
+// Sub-component for Stats
+function StatTile({ label, value, color = "text-white" }) {
+  return (
+    <div className="group">
+      <p className="mb-1 text-[10px] font-bold uppercase tracking-[0.2em] text-richblack-500 group-hover:text-primary-50 transition-colors">
+        {label}
+      </p>
+      <p className={`text-3xl font-extrabold ${color} tracking-tight`}>{value}</p>
     </div>
   )
 }

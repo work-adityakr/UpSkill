@@ -63,7 +63,7 @@ export default function Upload({
 
   return (
     <div className="flex flex-col space-y-2">
-      <label className="text-sm text-richblack-5" htmlFor={name}>
+      <label className="text-sm text-neutral-50" htmlFor={name}>
         {label} {!viewData && <sup className="text-pink-200">*</sup>}
       </label>
 
@@ -71,7 +71,7 @@ export default function Upload({
       <div
         {...getRootProps({
           className: `${
-            isDragActive ? "bg-richblack-600" : "bg-richblack-700"
+            isDragActive ? "bg-background-600" : "bg-background-700"
           } flex min-h-[250px] cursor-pointer items-center justify-center rounded-md border-2 border-dotted border-richblack-500 transition-all`,
         })}
       >
@@ -92,7 +92,7 @@ export default function Upload({
               <button
                 type="button"
                 onClick={handleCancel}
-                className="mt-3 self-start text-richblack-400 underline"
+                className="mt-3 self-start text-neutral-400 underline"
               >
                 Cancel
               </button>
@@ -103,7 +103,7 @@ export default function Upload({
             <div className="grid aspect-square w-14 place-items-center rounded-full bg-pure-greys-800">
               <FiUploadCloud className="text-2xl text-yellow-50" />
             </div>
-            <p className="mt-2 max-w-[260px] text-sm text-richblack-200">
+            <p className="mt-2 max-w-[260px] text-sm text-neutral-200">
               Drag & drop an {!video ? "image" : "video"}, or{" "}
               <span
                 role="button"
@@ -116,7 +116,7 @@ export default function Upload({
                 Browse
               </span>
             </p>
-            <ul className="mt-8 flex list-disc justify-between space-x-12 text-xs text-richblack-200">
+            <ul className="mt-8 flex list-disc justify-between space-x-12 text-xs text-neutral-200">
               <li>Aspect ratio 16:9</li>
               <li>Recommended size 1024×576</li>
             </ul>

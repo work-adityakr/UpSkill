@@ -17,14 +17,19 @@ export default function RenderTotalAmount() {
   }
 
   return (
-    <div className="min-w-[280px] rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-6">
-      <p className="mb-1 text-sm font-medium text-richblack-300">Total:</p>
-      <p className="mb-6 text-3xl font-medium text-yellow-100">₹ {total}</p>
+    <div className="min-w-[280px] rounded-2xl border border-richblack-800 bg-richblack-800/60 p-6 backdrop-blur-md">
+      <p className="mb-1 text-sm font-bold text-richblack-400 uppercase tracking-widest">Total Amount:</p>
+      <p className="mb-6 text-4xl font-extrabold text-primary-50 shadow-glow-indigo">₹ {total}</p>
+
       <IconBtn
-        text="Buy Now"
+        text="Checkout Now"
         onclick={handleBuyCourse}
-        customClasses="w-full justify-center"
+        customClasses="w-full justify-center py-4 text-lg font-bold rounded-xl shadow-glow-indigo"
       />
+
+      <p className="mt-4 text-center text-xs text-richblack-400">
+        🔒 Secure Payment Gateway
+      </p>
     </div>
   )
 }
