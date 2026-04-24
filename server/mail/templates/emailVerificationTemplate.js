@@ -66,7 +66,7 @@ const otpTemplate = (otp) => {
 	
 	<body>
 		<div class="container">
-			<a href="https://studynotion-edtech-project.vercel.app">     
+			<a href="https://upskill-ad.vercel.app">     
 			<div className="flex items-center gap-1">
             <p className="text-2xl font-bold tracking-tighter text-richblack-5 uppercase">
               Up<span className="text-yellow-50">Skill</span>
