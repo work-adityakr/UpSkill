@@ -12,11 +12,11 @@ const Contact = () => {
 
       <div className="mx-auto mt-24 flex w-11/12 max-w-maxContent flex-col justify-between gap-12 text-white lg:flex-row lg:items-start">
         
-        <div className="lg:w-[40%] rounded-3xl border border-white/5 bg-richblack-900/40 p-8 md:p-10 backdrop-blur-xl shadow-glass-inset h-fit transition-all duration-300 hover:border-primary-50/20">
+        <div className="lg:w-[40%] rounded-3xl border border-white/5 bg-richblack-700 p-8 md:p-10 backdrop-blur-xl shadow-glass-inset h-fit transition-all duration-300 hover:border-primary-50/20">
           <ContactDetails />
         </div>
 
-        <div className="lg:w-[55%] rounded-3xl border border-white/5 bg-richblack-900/20 p-8 lg:p-16 backdrop-blur-xl shadow-glass-inset">
+        <div className="lg:w-[55%] rounded-3xl border border-white/5 bg-richblack-800 p-8 lg:p-16 backdrop-blur-xl shadow-glass-inset">
           <h1 className="text-4xl font-extrabold tracking-tight mb-4">
             Got an Idea? We&apos;ve got the <span className="bg-gradient-to-r from-primary-50 to-blue-200 bg-clip-text text-transparent italic">skills.</span>
           </h1>

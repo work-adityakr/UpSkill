@@ -47,7 +47,7 @@ function RatingStars({ Review_Count, Star_Size }) {
         <TiStarOutline 
           key={`empty-${i}`} 
           size={Star_Size || 20} 
-          className="text-richblack-600"
+          className="text-richblack-200"
         />
       ))}
     </div>

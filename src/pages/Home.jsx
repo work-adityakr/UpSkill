@@ -75,7 +75,7 @@ function Home() {
 
         <div className="grid grid-cols-1 md:grid-cols-12 md:grid-rows-2 gap-8 min-h-[850px]">
 
-          <div className="md:col-span-7 rounded-[40px] border border-white/5 bg-richblack-900/40 p-10 md:p-14 backdrop-blur-xl overflow-hidden relative group transition-all duration-500 hover:border-white/10">
+          <div className="md:col-span-7 rounded-[40px] border border-white/5 bg-richblack-700 p-10 md:p-14 backdrop-blur-xl overflow-hidden relative group transition-all duration-500 hover:border-white/10">
             <div className="absolute -top-20 -right-20 h-96 w-96 bg-primary-50/10 blur-[120px] rounded-full -z-10"></div>
 
             <div className="relative z-20 space-y-4">
@@ -106,8 +106,8 @@ function Home() {
           </div>
 
           {/* 24/7 Support (Improved Visual Weight) */}
-          <div className="md:col-span-5 rounded-[40px] border border-white/5 bg-gradient-to-br from-richblack-900/60 to-richblack-800/20 p-10 md:p-14 backdrop-blur-xl flex flex-col justify-between group hover:border-primary-50/20 transition-all duration-500">
-            <Link to="/signup" className="h-20 w-20 rounded-3xl bg-primary-50/10 border border-primary-50/20 flex items-center justify-center text-primary-50 shadow-glow-indigo group-hover:scale-110 group-hover:rotate-12 transition-all duration-500">
+          <div className="md:col-span-5 rounded-[40px] border border-white/5 bg-gradient-to-br from-richblack-600 to-richblack-800/20 p-10 md:p-14 backdrop-blur-xl flex flex-col justify-between group hover:border-primary-50/20 transition-all duration-500">
+            <Link to="/signup" className="h-20 w-20 rounded-3xl bg-primary-50/10 border border-primary-90/20 flex items-center justify-center text-primary-50 shadow-glow-indigo group-hover:scale-110 group-hover:rotate-12 transition-all duration-500">
               <FaArrowRight className="-rotate-45 text-2xl" />
             </Link>
             <div className="space-y-3">
@@ -117,8 +117,8 @@ function Home() {
           </div>
 
           {/* Industry Ready (Larger text and background) */}
-          <div className="md:col-span-5 rounded-[40px] border border-white/5 bg-richblack-900/20 p-10 md:p-14 backdrop-blur-xl flex flex-col justify-end relative group overflow-hidden">
-            <div className="absolute top-5 right-[-20px] p-8 opacity-5 group-hover:opacity-10 transition-opacity duration-700 pointer-events-none">
+          <div className="md:col-span-5 rounded-[40px] border border-white/5 bg-richblack-800 p-10 md:p-14 backdrop-blur-xl flex flex-col justify-end relative group overflow-hidden">
+            <div className="absolute top-5 right-[-20px] p-8 opacity-10 group-hover:opacity-20 transition-opacity duration-700 pointer-events-none">
               <h1 className="text-9xl font-black text-white">FAANG</h1>
             </div>
             <div className="relative z-10 space-y-3">
@@ -127,7 +127,7 @@ function Home() {
             </div>
           </div>
 
-          <div className="md:col-span-7 rounded-[40px] border border-white/5 bg-richblack-900/20 p-10 md:p-14 backdrop-blur-xl flex items-center justify-between group hover:border-white/10 transition-all duration-500">
+          <div className="md:col-span-7 rounded-[40px] border border-white/5 bg-richblack-800 p-10 md:p-14 backdrop-blur-xl flex items-center justify-between group hover:border-white/10 transition-all duration-500">
             <div className="max-w-[55%] space-y-3">
               <h3 className="text-3xl font-bold text-white tracking-tight">Global Community</h3>
               <p className="text-richblack-300 text-lg leading-relaxed">Join 20,000+ developers learning and building projects together.</p>

@@ -27,7 +27,7 @@ const contactDetails = [
 
 const ContactDetails = () => {
 return (
-    <div className="flex flex-col gap-y-8 rounded-3xl border border-white/5 bg-richblack-900/40 p-8 shadow-glass-inset backdrop-blur-xl">
+    <div className="flex flex-col gap-y-8 rounded-3xl border border-white/5 bg-richblack-800 p-8 shadow-glass-inset backdrop-blur-xl">
       {contactDetails.map((ele, i) => {
         let Icon = Icon1[ele.icon] || Icon2[ele.icon] || Icon3[ele.icon]
         

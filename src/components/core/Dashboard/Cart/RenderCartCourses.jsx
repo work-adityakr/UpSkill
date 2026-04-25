@@ -26,7 +26,7 @@ export default function RenderCartCourses() {
               <div className="flex items-center gap-2">
                 <span className="text-yellow-50 font-bold">4.5</span>
                 <ReactStars count={5} size={20} edit={false} activeColor="#ffd700" />
-                <span className="text-richblack-400">({course?.ratingAndReviews?.length} Ratings)</span>
+                <span className="text-richblack-200">({course?.ratingAndReviews?.length} Ratings)</span>
               </div>
             </div>
 

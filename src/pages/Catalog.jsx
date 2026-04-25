@@ -87,16 +87,16 @@ function Catalog() {
         </div>
 
         {catalogPageData?.data?.selectedCategory?.courses?.length > 0 && (
-          <div className="my-10 flex w-fit bg-richblack-900 p-1 rounded-2xl border border-white/5 shadow-glass-inset">
+          <div className="my-10 flex w-fit bg-richblack-700 p-1 rounded-2xl border border-white/5 shadow-glass-inset">
             <button
-              className={`rounded-xl py-3 px-10 text-sm font-bold transition-all duration-300 ${active === 1 ? "bg-richblack-800 text-primary-50 shadow-glow-indigo" : "text-richblack-400 hover:text-white"
+              className={`rounded-xl py-3 px-10 text-sm font-bold transition-all duration-300 ${active === 1 ? "bg-richblack-800 text-primary-50 shadow-glow-indigo" : "text-richblack-200 hover:text-white"
                 }`}
               onClick={() => setActive(1)}
             >
               Most Popular
             </button>
             <button
-              className={`rounded-xl py-3 px-10 text-sm font-bold transition-all duration-300 ${active === 2 ? "bg-richblack-800 text-primary-50 shadow-glow-indigo" : "text-richblack-400 hover:text-white"
+              className={`rounded-xl py-3 px-10 text-sm font-bold transition-all duration-300 ${active === 2 ? "bg-richblack-800 text-primary-50 shadow-glow-indigo" : "text-richblack-200 hover:text-white"
                 }`}
               onClick={() => setActive(2)}
             >
@@ -110,7 +110,7 @@ function Catalog() {
             <CourseSlider Courses={catalogPageData?.data?.selectedCategory?.courses} />
           ) : (
             <div className="flex flex-col items-center justify-center py-24 rounded-[40px] border border-white/5 bg-white/5 backdrop-blur-xl shadow-glass-inset">
-              <div className="h-24 w-24 rounded-full bg-richblack-900 flex items-center justify-center mb-6 border border-white/10 shadow-glow-indigo">
+              <div className="h-24 w-24 rounded-full bg-richblack-700 flex items-center justify-center mb-6 border border-white/10 shadow-glow-indigo">
                 <p className="text-5xl animate-pulse">📚</p>
               </div>
               <h3 className="text-2xl font-bold text-white tracking-tight">No courses found yet</h3>

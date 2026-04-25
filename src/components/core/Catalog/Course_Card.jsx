@@ -36,7 +36,7 @@ function Course_Card({ course, Height }) {
             <div className="flex items-center gap-2">
               <span className="text-yellow-50 font-bold">{avgReviewCount || 0}</span>
               <RatingStars Review_Count={avgReviewCount} />
-              <span className="text-richblack-500 text-sm">({course?.ratingAndReviews?.length} Ratings)</span>
+              <span className="text-richblack-200 text-sm">({course?.ratingAndReviews?.length} Ratings)</span>
             </div>
 
             <div className="flex items-center justify-between border-t border-white/5 pt-4">
