@@ -248,7 +248,7 @@ function Navbar() {
               </Link>
             </>
           ) : (
-            <Link to="/dashboard" onClick={() => setIsMenuOpen(false)}>
+            <Link to="/dashboard/my-profile" onClick={() => setIsMenuOpen(false)}>
               <button className="w-full rounded-xl bg-yellow-50 py-3 font-bold text-black">
                 Dashboard
               </button>
