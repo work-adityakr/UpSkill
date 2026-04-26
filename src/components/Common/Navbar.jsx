@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { AiOutlineMenu, AiOutlineShoppingCart } from "react-icons/ai"
+import { AiOutlineMenu, AiOutlineShoppingCart, AiOutlineClose } from "react-icons/ai"
 import { BsChevronDown } from "react-icons/bs"
 import { useSelector } from "react-redux"
 import { Link, matchPath, useLocation } from "react-router-dom"
@@ -17,8 +17,10 @@ function Navbar() {
 
   const [subLinks, setSubLinks] = useState([])
   const [loading, setLoading] = useState(false)
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isCatalogOpen, setIsCatalogOpen] = useState(false); // New state just for mobile
 
-  // Fetch Categories for the Catalog dropdown (The "Love Babbar" way)
+  // Fetch Categories for the Catalog dropdown
   useEffect(() => {
     ; (async () => {
       setLoading(true)
@@ -33,6 +35,8 @@ function Navbar() {
   }, [])
 
   const matchRoute = (route) => {
+    if (!route) return false;
+
     return matchPath({ path: route }, location.pathname)
   }
 
@@ -141,10 +145,122 @@ function Navbar() {
           {token !== null && <ProfileDropdown />}
         </div>
 
-        <button className="mr-4 md:hidden">
+        <button className="mr-4 md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
           <AiOutlineMenu fontSize={24} fill="#AFB2BF" />
         </button>
       </div>
+
+      {/* Mobile Menu Drawer */}
+{isMenuOpen && (
+  <div className="fixed inset-0 z-[2000] md:hidden">
+    
+    {/* Overlay */}
+    <div
+      onClick={() => setIsMenuOpen(false)}
+      className="absolute inset-0 bg-black/70 backdrop-blur-md"
+    ></div>
+
+    {/* Drawer */}
+    <div className="absolute right-0 top-0 h-screen w-[88%] max-w-[340px] bg-richblack-900 border-l border-richblack-700 shadow-2xl animate-slideLeft overflow-y-auto">
+
+      <div className="flex min-h-screen flex-col px-5 py-5">
+
+        {/* Header */}
+        <div className="flex items-center justify-between border-b border-richblack-700 pb-4">
+          <h2 className="text-2xl font-bold text-white uppercase tracking-tight">
+            Up<span className="text-yellow-50">Skill</span>
+          </h2>
+
+          <button
+            onClick={() => setIsMenuOpen(false)}
+            className="rounded-full bg-richblack-800 p-2"
+          >
+            <AiOutlineClose size={22} className="text-white" />
+          </button>
+        </div>
+
+        {/* Links */}
+        <div className="mt-6 flex flex-col gap-3">
+
+          {NavbarLinks.map((link, index) => (
+            <div key={index}>
+              {link.title === "Catalog" ? (
+                <div className="rounded-xl bg-richblack-800 border border-richblack-700">
+
+                  <button
+                    onClick={() => setIsCatalogOpen(!isCatalogOpen)}
+                    className="flex w-full items-center justify-between px-4 py-4 text-white font-medium"
+                  >
+                    <span>{link.title}</span>
+                    <BsChevronDown
+                      className={`transition-all duration-300 ${
+                        isCatalogOpen ? "rotate-180 text-yellow-50" : ""
+                      }`}
+                    />
+                  </button>
+
+                  {isCatalogOpen && (
+                    <div className="px-3 pb-3 space-y-2">
+                      {subLinks.map((subLink, i) => (
+                        <Link
+                          key={i}
+                          to={`/catalog/${subLink.name
+                            .split(" ")
+                            .join("-")
+                            .toLowerCase()}`}
+                          onClick={() => setIsMenuOpen(false)}
+                          className="block rounded-lg px-3 py-2 text-sm text-richblack-100 hover:bg-richblack-700"
+                        >
+                          {subLink.name}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <Link
+                  to={link.path}
+                  onClick={() => setIsMenuOpen(false)}
+                  className="block rounded-xl bg-richblack-800 px-4 py-4 text-white font-medium hover:bg-richblack-700"
+                >
+                  {link.title}
+                </Link>
+              )}
+            </div>
+          ))}
+        </div>
+
+        {/* Bottom Buttons */}
+        <div className="mt-auto pt-8 space-y-3">
+
+          {token === null ? (
+            <>
+              <Link to="/login" onClick={() => setIsMenuOpen(false)}>
+                <button className="w-full rounded-xl border border-richblack-700 py-3 text-white font-semibold">
+                  Log In
+                </button>
+              </Link>
+
+              <Link to="/signup" onClick={() => setIsMenuOpen(false)}>
+                <button className="w-full rounded-xl bg-gradient-to-r from-yellow-50 to-yellow-200 py-3 font-bold text-black">
+                  Get Started
+                </button>
+              </Link>
+            </>
+          ) : (
+            <Link to="/dashboard" onClick={() => setIsMenuOpen(false)}>
+              <button className="w-full rounded-xl bg-yellow-50 py-3 font-bold text-black">
+                Dashboard
+              </button>
+            </Link>
+          )}
+
+        </div>
+      </div>
+    </div>
+  </div>
+)}
+
     </div>
   )
 }
