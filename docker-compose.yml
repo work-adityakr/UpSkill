@@ -1,21 +1,29 @@
 version: '3.8'
 
+networks:
+  upskill_net:
+    driver: bridge
+    
 services:
   backend:
     # Tells Docker to look inside the /server folder for the Backend Dockerfile
-    build: ./server
+    image: workadityakr/upskill-backend:latest
     container_name: upskill_backend
     ports:
       - "4000:4000"
     # Mounts your local .env file into the container
     env_file:
       - ./.env
+    networks:
+      - upskill_net  
 
   frontend:
     # Tells Docker to use the Dockerfile in the current (root) directory
-    build: .
+    image: workadityakr/upskill-frontend:latest
     container_name: upskill_frontend
     ports:
       - "3000:80"
     depends_on:
       - backend
+    networks:
+      - upskill_net
