@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: upskill-frontend-deployment
+  namespace: upskill-namespace
+spec:
+  replicas: 2 # 2 Pods are usually plenty for a frontend
+  selector:
+    matchLabels:
+      app: upskill-frontend
+  template:
+    metadata:
+      labels:
+        app: upskill-frontend
+    spec:
+      containers:
+      - name: frontend
+        image: workadityakr/upskill-frontend:latest # Make sure this matches your Docker Hub!
+        ports:
+        - containerPort: 80 # Change to 80 if you used Nginx for your frontend image
+        
+        # We inject the ConfigMap so React gets the backend API URL
+        envFrom:
+        - configMapRef:
+            name: upskill-config

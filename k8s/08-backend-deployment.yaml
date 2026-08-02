@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: upskill-backend-deployment
+  namespace: upskill-namespace
+spec:
+  replicas: 3 # This tells K8s to spin up 3 Pods!
+  selector:
+    matchLabels:
+      app: upskill-backend
+  template:
+    metadata:
+      labels:
+        app: upskill-backend
+    spec:
+      containers:
+      - name: backend
+        image: workadityakr/upskill-backend:latest # Pulls from your Docker Hub
+        ports:
+        - containerPort: 4000
+        
+        # This is where we inject the variables we made earlier!
+        envFrom:
+        - configMapRef:
+            name: upskill-config
+        - secretRef:
+            name: upskill-secrets
