@@ -13,6 +13,9 @@ COPY tailwind.config.js ./
 COPY *.json ./
 COPY *.js ./
 
+# Copy the .env file Jenkins creates before building
+COPY .env ./
+
 # Build the project (Outputs to the /build folder)
 RUN npm run build
 
