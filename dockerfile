@@ -24,6 +24,9 @@ FROM nginx:alpine
 # Copy the compiled files from Stage 1 to Nginx's serving directory
 COPY --from=build /app/build /usr/share/nginx/html
 
+# Add this new line to replace the default Nginx config!
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
 # Expose port 80 for the Nginx server
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
