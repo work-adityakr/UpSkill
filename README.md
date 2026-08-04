@@ -38,6 +38,7 @@ Secure Secrets Management: Database credentials and environment variables are se
 Real-time Observability: Integrated Helm charts for Prometheus and Grafana, providing deep, real-time insights into pod compute resources and cluster health across all namespaces.
 
 Repository Structure
+
 ├── server/                 # Node.js backend source code and backend Dockerfile
 ├── src/                    # React.js frontend source code
 ├── k8s/                    # Kubernetes deployment manifests
@@ -50,6 +51,7 @@ Repository Structure
 │   └── 13-hpa.yaml
 ├── Dockerfile              # Frontend Dockerfile
 └── Jenkinsfile             # Declarative Jenkins CI/CD pipeline
+
 
 kubectl & helm
 
@@ -64,6 +66,7 @@ Verify the nodes are ready:
 
 Bash
 kubectl get nodes
+
 2. Deployment Workflow
 This project utilizes a fully automated CI/CD pipeline. To deploy changes:
 
