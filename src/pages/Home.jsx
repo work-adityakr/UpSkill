@@ -37,7 +37,7 @@ function Home() {
 
         <p className="mt-8 text-center text-lg md:text-xl text-richblack-300 max-w-[700px] font-medium leading-relaxed">
           UpSkill is the professional-grade platform for developers.
-          Experience high-fidelity learning with AI-driven mentorships and real-world projects.
+          Experience high-fidelity learning with AI-driven mentorship and real-world projects.
         </p>
 
         {/* Hero Actions */}
