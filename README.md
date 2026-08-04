@@ -1,11 +1,13 @@
 # UpSkill Edtech Project
 
 UpSkill - EdTech Platform 
+
 UpSkill is a fully containerized, full-stack educational technology platform built with the MERN stack. It empowers students to learn through interactive courses and allows instructors to create, manage, and sell their educational content.
 
 This repository contains the application source code alongside a complete, production-grade DevOps ecosystem, including automated Jenkins CI/CD, Kubernetes orchestration, and Prometheus/Grafana monitoring.
 
-🏗 Architecture & Tech Stack
+Architecture & Tech Stack
+
 Application Stack:
 
 Frontend: React.js
@@ -27,6 +29,7 @@ Container Registry: Docker Hub
 Monitoring & Observability: Prometheus & Grafana (kube-prometheus-stack)
 
 Features
+
 EdTech Capabilities: Complete instructor and student flows for course creation and consumption.
 
 Zero-Downtime Deployments: Fully automated Jenkins pipeline that seamlessly replaces pods during updates without dropping user connections.
@@ -77,13 +80,16 @@ Commit and push to the main branch.
 Jenkins will automatically trigger, build the images, push them to Docker Hub, and execute a kubectl rollout restart to update the Kubernetes cluster.
 
 3. Access the Application
+   
 The React frontend is exposed via a NodePort. Access the application in your browser at:
 
 Plaintext
+
 http://localhost:30000
 (Alternatively, you can port-forward directly into the container: kubectl port-forward svc/upskill-frontend-service 3000:3000 -n upskill-namespace)
 
 Monitoring Setup
+
 To view live metrics of the application, start the monitoring port-forward:
 
 Bash
