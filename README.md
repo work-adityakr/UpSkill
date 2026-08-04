@@ -1,13 +1,11 @@
 # UpSkill Edtech Project
 
 UpSkill - EdTech Platform 
-
 UpSkill is a fully containerized, full-stack educational technology platform built with the MERN stack. It empowers students to learn through interactive courses and allows instructors to create, manage, and sell their educational content.
 
 This repository contains the application source code alongside a complete, production-grade DevOps ecosystem, including automated Jenkins CI/CD, Kubernetes orchestration, and Prometheus/Grafana monitoring.
 
-Architecture & Tech Stack
-
+🏗 Architecture & Tech Stack
 Application Stack:
 
 Frontend: React.js
@@ -29,7 +27,6 @@ Container Registry: Docker Hub
 Monitoring & Observability: Prometheus & Grafana (kube-prometheus-stack)
 
 Features
-
 EdTech Capabilities: Complete instructor and student flows for course creation and consumption.
 
 Zero-Downtime Deployments: Fully automated Jenkins pipeline that seamlessly replaces pods during updates without dropping user connections.
@@ -41,6 +38,7 @@ Secure Secrets Management: Database credentials and environment variables are se
 Real-time Observability: Integrated Helm charts for Prometheus and Grafana, providing deep, real-time insights into pod compute resources and cluster health across all namespaces.
 
 Repository Structure
+
 
 ├── server/                 # Node.js backend source code and backend Dockerfile
 ├── src/                    # React.js frontend source code
@@ -55,6 +53,12 @@ Repository Structure
 ├── Dockerfile              # Frontend Dockerfile
 └── Jenkinsfile             # Declarative Jenkins CI/CD pipeline
 
+
+Getting Started (Local Development)
+
+Prerequisites
+
+Docker & kind (Kubernetes in Docker)
 
 kubectl & helm
 
@@ -80,16 +84,13 @@ Commit and push to the main branch.
 Jenkins will automatically trigger, build the images, push them to Docker Hub, and execute a kubectl rollout restart to update the Kubernetes cluster.
 
 3. Access the Application
-   
 The React frontend is exposed via a NodePort. Access the application in your browser at:
 
 Plaintext
-
 http://localhost:30000
 (Alternatively, you can port-forward directly into the container: kubectl port-forward svc/upskill-frontend-service 3000:3000 -n upskill-namespace)
 
 Monitoring Setup
-
 To view live metrics of the application, start the monitoring port-forward:
 
 Bash
@@ -102,6 +103,8 @@ Get Password:
 
 Bash
 kubectl get secret prometheus-stack-grafana -n monitoring -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
+
+
 👨 Author
 Aditya Kumar
 
