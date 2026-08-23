@@ -1,9 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
+ 
+const getSafeToken = () => {
+  const rawToken = localStorage.getItem("token");
+  if (!rawToken) return null;
+  try {
+    return JSON.parse(rawToken);
+  } catch (error) {
+    return rawToken;
+  }
+};
 
 const initialState = {
   signupData: null,
   loading: false,
-  token: localStorage.getItem("token") ? localStorage.getItem("token") : null,
+  token: getSafeToken(),
 };
 
 const authSlice = createSlice({

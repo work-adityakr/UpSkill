@@ -42,16 +42,22 @@ function App() {
   const { user } = useSelector((state) => state.profile)
 
   useEffect(() => {
-    if (localStorage.getItem("token")) {
-      const token = JSON.parse(localStorage.getItem("token"))
-      dispatch(getUserDetails(token, navigate))
+    const rawToken = localStorage.getItem("token");
+    if (rawToken) {
+      let token = rawToken;
+      try {
+        token = JSON.parse(rawToken);
+      } catch (error) {
+        token = rawToken;
+      }
+      dispatch(getUserDetails(token, navigate));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, []);
 
   return (
-<div className="min-h-screen bg-richblack-900 text-white selection:bg-yellow-50 selection:text-richblack-900">
-      
+    <div className="min-h-screen bg-richblack-900 text-white selection:bg-yellow-50 selection:text-richblack-900">
+
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -68,7 +74,7 @@ function App() {
             </OpenRoute>
           }
         />
-         <Route
+        <Route
           path="auth-success"
           element={
             <OpenRoute>

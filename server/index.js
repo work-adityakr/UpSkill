@@ -47,7 +47,7 @@ app.use(
 cloudinaryConnect();
 
 // Setting up routes
-app.use("/auth",authRoutes)
+app.use("/api/v1/auth",authRoutes)
 app.use("/api/v1/auth", userRoutes);
 app.use("/api/v1/profile", profileRoutes);
 app.use("/api/v1/course", courseRoutes);

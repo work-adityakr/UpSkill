@@ -184,13 +184,13 @@ function SignupForm() {
           <div className="flex w-full flex-col gap-y-3 animate-in fade-in slide-in-from-bottom-2 duration-300">
             <div className="flex gap-x-3">
               <button
-                onClick={() => window.open("http://localhost:4000/auth/google?type=Student", "_self")}
+                onClick={() => window.open(`${process.env.REACT_APP_BASE_URL}/auth/google?type=Student`, "_self")}
                 className="flex-1 rounded-xl bg-background-card py-3 font-semibold text-white border border-richblack-600 hover:bg-background-700 transition-all active:scale-95"
               >
                 Student
               </button>
               <button
-                onClick={() => window.open("http://localhost:4000/auth/google?type=Instructor", "_self")}
+                onClick={() => window.open(`${process.env.REACT_APP_BASE_URL}/auth/google?type=Instructor`, "_self")}
                 className="flex-1 rounded-xl bg-richblue-500 py-3 font-semibold text-white border border-richblue-400 hover:bg-richblue-400 transition-all active:scale-95 shadow-[0_0_15px_rgba(99,102,241,0.2)]"
               >
                 Instructor

@@ -18,11 +18,11 @@ const AuthSuccess = () => {
             console.log("oauth", token);
 
             if (token) {
-                localStorage.setItem("token", JSON.stringify(token));
+                localStorage.setItem("token", token);
                 // Also update your Redux state if using it
                 // dispatch(setToken(token)); 
                 try {
-                    const res = await axios.get("http://localhost:4000/auth/me", {
+                    const res = await axios.get(`${process.env.REACT_APP_BASE_URL}/auth/me`, {
                         headers: {
                             Authorization: `Bearer ${token}`
                         }
