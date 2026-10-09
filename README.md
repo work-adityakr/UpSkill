@@ -1,45 +1,38 @@
-# UpSkill Edtech Project
+# UpSkill
 
-UpSkill - EdTech Platform 
 UpSkill is a fully containerized, full-stack educational technology platform built with the MERN stack. It empowers students to learn through interactive courses and allows instructors to create, manage, and sell their educational content.
 
-This repository contains the application source code alongside a complete, production-grade DevOps ecosystem, including automated Jenkins CI/CD, Kubernetes orchestration, and Prometheus/Grafana monitoring.
+This repository contains the application source code alongside a complete, production-grade DevOps ecosystem, featuring automated Jenkins CI/CD pipelines, Kubernetes orchestration, and robust Prometheus/Grafana monitoring.
 
-🏗 Architecture & Tech Stack
-Application Stack:
+## ✨ Key Features
 
-Frontend: React.js
+* **Zero-Downtime Deployments:** Fully automated Jenkins pipeline that seamlessly replaces Kubernetes pods during updates without dropping user connections.
+* **Auto-Scaling:** Configured with Kubernetes Horizontal Pod Autoscaler (HPA) to dynamically adjust resources based on live CPU and memory loads.
+* **Secure Secrets Management:** Database credentials and environment variables are securely injected into Kubernetes directly from Jenkins memory, eliminating hard-coded secrets.
+* **Real-Time Observability:** Integrated Helm charts for Prometheus and Grafana, providing deep insights into pod compute resources and cluster health across all namespaces.
 
-Backend: Node.js, Express.js
+---
 
-Database: MongoDB
+## 🚀 Tech Stack
 
-Containerization: Docker
+**Application Stack:**
 
-DevOps & Infrastructure:
+* **Frontend:** React.js
+* **Backend:** Node.js, Express.js
+* **Database:** MongoDB
 
-Orchestration: Kubernetes (Local multi-node cluster via kind)
+**DevOps & Infrastructure:**
 
-CI/CD: Jenkins (Automated build, push, and zero-downtime rolling updates)
+* **Containerization:** Docker & Docker Hub
+* **Orchestration:** Kubernetes (Local multi-node cluster via `kind`)
+* **CI/CD Pipeline:** Jenkins
+* **Monitoring:** Prometheus & Grafana (`kube-prometheus-stack`)
 
-Container Registry: Docker Hub
+---
 
-Monitoring & Observability: Prometheus & Grafana (kube-prometheus-stack)
+## 📂 Repository Structure
 
-Features
-EdTech Capabilities: Complete instructor and student flows for course creation and consumption.
-
-Zero-Downtime Deployments: Fully automated Jenkins pipeline that seamlessly replaces pods during updates without dropping user connections.
-
-Auto-Scaling: Configured with Kubernetes Horizontal Pod Autoscaler (HPA) to dynamically adjust resources based on CPU and memory loads.
-
-Secure Secrets Management: Database credentials and environment variables are securely injected into Kubernetes directly from Jenkins memory, eliminating hard-coded secrets.
-
-Real-time Observability: Integrated Helm charts for Prometheus and Grafana, providing deep, real-time insights into pod compute resources and cluster health across all namespaces.
-
-Repository Structure
-
-
+```text
 ├── server/                 # Node.js backend source code and backend Dockerfile
 ├── src/                    # React.js frontend source code
 ├── k8s/                    # Kubernetes deployment manifests
@@ -53,61 +46,83 @@ Repository Structure
 ├── Dockerfile              # Frontend Dockerfile
 └── Jenkinsfile             # Declarative Jenkins CI/CD pipeline
 
+```
 
-Getting Started (Local Development)
+---
 
-Prerequisites
+## 🛠️ Local Setup (Kubernetes via Kind)
 
-Docker & kind (Kubernetes in Docker)
+### 1. Prerequisites
 
-kubectl & helm
+* [Docker](https://www.docker.com/) and [kind](https://kind.sigs.k8s.io/) (Kubernetes in Docker) installed.
+* `kubectl` and `helm` installed on your local machine.
+* A running Jenkins server connected to your GitHub webhook.
 
-A running Jenkins server connected to your GitHub webhook
+### 2. Start the Local Cluster
 
-1. Start the Local Cluster
-Wake up the multi-node kind cluster (1 control-plane, 2 workers):
+Wake up your multi-node `kind` cluster (1 control-plane, 2 workers) by starting the Docker containers:
 
-Bash
+```bash
 docker start upskill-cluster-control-plane upskill-cluster-worker upskill-cluster-worker2
+
+```
+
 Verify the nodes are ready:
 
-Bash
+```bash
 kubectl get nodes
 
-2. Deployment Workflow
-This project utilizes a fully automated CI/CD pipeline. To deploy changes:
+```
 
-Make changes to the frontend or backend code.
+### 3. Automated Deployment Workflow
 
-Commit and push to the main branch.
+This project utilizes a fully automated CI/CD pipeline. To deploy new changes:
 
-Jenkins will automatically trigger, build the images, push them to Docker Hub, and execute a kubectl rollout restart to update the Kubernetes cluster.
+1. Make changes to the frontend or backend code.
+2. Commit and push to the `main` branch.
+3. Jenkins will automatically trigger, build the updated images, push them to Docker Hub, and execute a `kubectl rollout restart` to update the cluster seamlessly.
 
-3. Access the Application
-The React frontend is exposed via a NodePort. Access the application in your browser at:
+### 4. Access the Application
 
-Plaintext
-http://localhost:30000
-(Alternatively, you can port-forward directly into the container: kubectl port-forward svc/upskill-frontend-service 3000:3000 -n upskill-namespace)
+The React frontend is exposed via a NodePort. Access the live application in your browser at:
+**[http://localhost:30000](http://localhost:30000)**
 
-Monitoring Setup
-To view live metrics of the application, start the monitoring port-forward:
+*(Alternatively, you can port-forward directly into the container)*:
 
-Bash
+```bash
+kubectl port-forward svc/upskill-frontend-service 3000:3000 -n upskill-namespace
+
+```
+
+---
+
+## 📈 Monitoring & Observability
+
+To view live metrics of the application and cluster health, start the monitoring port-forward:
+
+```bash
 kubectl port-forward svc/prometheus-stack-grafana 8081:80 -n monitoring
-Access Grafana: http://localhost:8081
 
-Default Username: admin
+```
 
-Get Password:
+Access the Grafana dashboard at **[http://localhost:8081](http://localhost:8081)**.
 
-Bash
+**Credentials:**
+
+* **Username:** `admin`
+* **Password:** Retrieve the secure password from your cluster secrets by running:
+```bash
 kubectl get secret prometheus-stack-grafana -n monitoring -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
 
+```
 
-👨 Author
-Aditya Kumar
 
-Full Stack Developer (MERN)
 
-GitHub: work-adityakr
+---
+
+## 👨‍💻 Author
+
+**Aditya Kumar**
+
+* **GitHub:** [@work-adityakr](https://github.com/work-adityakr)
+* **Role:** Full Stack Developer (MERN / DevOps)
